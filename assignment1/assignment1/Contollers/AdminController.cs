@@ -1,4 +1,5 @@
-﻿using System;
+﻿using assignment1.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,16 @@ namespace assignment1.Contoller
 
         public void HandleAdminOptions()
         {
+            Console.WriteLine("Please enter your email id:");
+            string email = Console.ReadLine();
+
+            // Verify that the email belongs to an admin user
+            bool user = UserService.CheckForUserAndUserType(email,Role.ADMIN);
+            if (!user)
+            {
+                Console.WriteLine("Invalid email id or not an admin user.");
+                return;
+            }
             bool exit = false;
             while (!exit)
             {

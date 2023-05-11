@@ -11,13 +11,9 @@ namespace Assignment1
         {
             PopulateData populateData = new PopulateData();
             populateData.PopulateDataOnStart();
-
-
-
             bool exit = false;
             while (!exit)
             {
-               
                 Console.WriteLine("Please select the type of user from 1 to 4, press 5 to view book information or press 6 to exit :");
                 Console.WriteLine("1. ADMIN");
                 Console.WriteLine("2. STUDENT");
@@ -34,7 +30,6 @@ namespace Assignment1
                         Console.WriteLine("Selected ADMIN role");
                         AdminController adminController = new AdminController();
                         adminController.HandleAdminOptions();
-                        
                         break;
                     case "2":
                         // Code to handle selection of STUDENT role

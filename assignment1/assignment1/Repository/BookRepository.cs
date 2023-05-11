@@ -14,7 +14,6 @@ namespace assignment1.Repository
 
         public void CreateBookRepository()
         {
-            Console.WriteLine("Preeti");
             // Adding 2 books of type A
             Books.Add(1, new BookItem() { Id = 1, Title = "Book A1", Author = "Author A1", PublishDate = new DateOnly(2022, 1, 1), ItemId = 1, IssueDate = null, Status = BookStatus.AVAILABLE });
             Books.Add(2, new BookItem() { Id = 1, Title = "Book A1", Author = "Author A1", PublishDate = new DateOnly(2022, 1, 1), ItemId = 2, IssueDate = new DateOnly(2022,2,4), Status = BookStatus.ISSUED });
