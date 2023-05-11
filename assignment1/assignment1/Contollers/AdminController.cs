@@ -14,9 +14,11 @@ namespace assignment1.Contoller
         {
             Console.WriteLine("Please enter your email id:");
             string email = Console.ReadLine();
+            UserService userService=new UserService();
+            
 
             // Verify that the email belongs to an admin user
-            bool user = UserService.CheckForUserAndUserType(email,Role.ADMIN);
+            bool user = userService.CheckForUserAndUserType(email,Role.ADMIN);
             if (!user)
             {
                 Console.WriteLine("Invalid email id or not an admin user.");
