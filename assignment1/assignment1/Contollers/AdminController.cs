@@ -1,4 +1,5 @@
 ﻿using assignment1.Enum;
+using assignment1.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,29 +13,32 @@ namespace assignment1.Contoller
 
         public void HandleAdminOptions()
         {
+
             Console.WriteLine("Please enter your email id:");
             string email = Console.ReadLine();
-            UserService userService=new UserService();
-            
+            UserService userService = new UserService();
 
-            // Verify that the email belongs to an admin user
-            bool user = userService.CheckForUserAndUserType(email,Role.ADMIN);
-            if (!user)
+
+            // Verify that the email belongs to a valid user
+            bool isCorrectUser = userService.IsUserWithUserRole(email,Role.ADMIN);
+            if (!isCorrectUser)
             {
                 Console.WriteLine("Invalid email id or not an admin user.");
                 return;
             }
+
+            BookService bookService = new BookService();
+            UserService userService1 = new UserService();
             bool exit = false;
+
             while (!exit)
             {
                 Console.WriteLine("Please select an option:");
-                Console.WriteLine("1. Add user");
-                Console.WriteLine("2. Remove user");
-                Console.WriteLine("3. View all users");
-                Console.WriteLine("4. Add a book to inventpory");
-                Console.WriteLine("5. Remove a book from inventory");
-                Console.WriteLine("6. View all books");
-                Console.WriteLine("7. Exit");
+                Console.WriteLine("1. Add a user");
+                Console.WriteLine("2. View all users");
+                Console.WriteLine("3. Add a book to inventpory");
+                Console.WriteLine("4. View all books");
+                Console.WriteLine("5. Exit");
 
                 string input = Console.ReadLine();
                 switch (input)
@@ -42,33 +46,29 @@ namespace assignment1.Contoller
                     case "1":
                         // Code to handle adding a user
                         Console.WriteLine("Selected option 1: Add user");
+                        userService.AddUser();
                         break;
                     case "2":
-                        // Code to handle removing a user
-                        Console.WriteLine("Selected option 2: Remove user");
+                        // Code to handle viewing all users
+                        Console.WriteLine("Selected option 2: View all users");
+                        userService.ListAllUsers();
                         break;
                     case "3":
                         // Code to handle viewing all users
-                        Console.WriteLine("Selected option 3: View all users");
+                        Console.WriteLine("Selected option 3: Add book to inventory");
+                        bookService.AddNewBook();
                         break;
                     case "4":
-                        // Code to handle viewing all users
-                        Console.WriteLine("Selected option 4: Add book to inventory");
+                        Console.WriteLine("View all books");
+                        bookService.ListAllBooks();
                         break;
                     case "5":
-                        // Code to handle viewing all users
-                        Console.WriteLine("Selected option 5: Remove book from inventory");
-                        break;
-                    case "6":
-                        Console.WriteLine("View all books");
-                        break;
-                    case "7":
                         // Exit the loop and return to the main menu
                         exit = true;
                         Console.WriteLine("Exiting admin options...");
                         break;
                     default:
-                        Console.WriteLine("Invalid input. Please enter a number from 1 to 7.");
+                        Console.WriteLine("Invalid input. Please enter a number from 1 to 6.");
                         break;
                 }
 

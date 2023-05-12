@@ -31,10 +31,32 @@ namespace assignment1.Repository
         {
             return Books.Values.Where(book => book.Status == BookStatus.AVAILABLE).ToList();
         }
+        public List<BookItem> GetAllBooks()
+        {
+            return Books.Values.ToList();
+        }
 
         public BookItem FindBookByBookId(int bookItemId)
         {
             return Books.GetValueOrDefault(bookItemId);
         }
+
+        
+
+        public void AddBookToInventory(BookItem book)
+        {
+            if (book == null)
+            {
+                throw new ArgumentNullException(nameof(book));
+            }
+
+            if (Books.ContainsKey(book.ItemId))
+            {
+                throw new ArgumentException($"A book with item id {book.ItemId} already exists in the inventory.");
+            }
+
+            Books.Add(book.ItemId, book);
+        }
+
     }
 }

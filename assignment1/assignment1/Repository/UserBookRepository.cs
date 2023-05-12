@@ -9,30 +9,36 @@ namespace assignment1.Repository
 {
     internal class UserBookRepository
     {
-        public static Dictionary<string, BookIssued> BooksIssuedByUser = new Dictionary<string,BookIssued>();
+        //key is the user email which has issued the book
+        public static Dictionary<string, List<BookIssued>> BooksIssuedByUser = new Dictionary<string, List<BookIssued>>();
 
         public void CreateUserBookRepository()
         {
-            BooksIssuedByUser.Add("maryjohnson@example.com", new BookIssued(1, "maryjohnson@example.com",2, "alicesmith@example.com"));
+            BooksIssuedByUser.Add("maryjohnson@example.com", new List<BookIssued> { new BookIssued(1, "maryjohnson@example.com", 2, "alicesmith@example.com") });
         }
 
-        public void AddIssuedBookToUser(String UserEmail,BookIssued bookIssued)
+        public void AddIssuedBookToUser(string UserEmail, BookIssued bookIssued)
         {
-            BooksIssuedByUser[UserEmail] = bookIssued;
+            if (BooksIssuedByUser.ContainsKey(UserEmail))
+            {
+                BooksIssuedByUser[UserEmail].Add(bookIssued);
+            }
+            else
+            {
+                BooksIssuedByUser[UserEmail] = new List<BookIssued> { bookIssued };
+            }
         }
 
         public List<BookIssued> GetBooksIssuedByUserEmail(string userEmail)
         {
-            List<BookIssued> booksIssuedByUser = new List<BookIssued>();
-            foreach (BookIssued bookIssued in BooksIssuedByUser.Values)
+            if (BooksIssuedByUser.ContainsKey(userEmail))
             {
-                if (bookIssued.UserEmail == userEmail)
-                {
-                    booksIssuedByUser.Add(bookIssued);
-                }
+                return BooksIssuedByUser[userEmail];
             }
-            return booksIssuedByUser;
+            else
+            {
+                return new List<BookIssued>();
+            }
         }
-
     }
 }

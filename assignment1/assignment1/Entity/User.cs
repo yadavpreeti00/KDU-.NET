@@ -9,9 +9,7 @@ namespace assignment1.models
 {
     internal class User
     {
-        private double v;
-        private Role role;
-
+       
         //treating email address as primary key
         public string Email { get; set; } = string.Empty;
         public string FirstName { get; set; } = string.Empty;

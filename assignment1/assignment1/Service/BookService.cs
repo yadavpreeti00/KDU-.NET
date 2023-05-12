@@ -23,6 +23,16 @@ namespace assignment1.Service
 
 
         }
+        public void ListAllBooks()
+        {
+            List<BookItem> bookItems = bookRepository.GetAllBooks();
+            Console.WriteLine("All the books of the library are : ");
+            foreach(BookItem book in bookItems)
+            {
+                Console.WriteLine("Book item id : {0}, title: {1}, author: {2}, publish date: {3},status: {4}", book.ItemId, book.Title, book.Author, book.PublishDate,book.Status);
+            }
+
+        }
         public void GetAvailableBooks()
         {
             List<BookItem> availableBooks = bookRepository.GetAllAvailableBooks();
@@ -32,5 +42,12 @@ namespace assignment1.Service
                 Console.WriteLine("Book item id : {0}, title: {1}, author: {2}, publish date: {3}",book.ItemId,book.Title,book.Author,book.PublishDate);
             }
         }
+
+        public void AddNewBook()
+        {
+            BookItem bookItem = new BookItem();
+            
+        }
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using assignment1.Enum;
+using assignment1.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,20 @@ namespace assignment1.Contoller
     {
         public void HandleIssuerOptions()
         {
+            Console.WriteLine("Please enter your email id:");
+            string email = Console.ReadLine();
+            UserService userService = new UserService();
+            BookService bookService = new BookService();
+
+
+
+            // Verify that the email belongs to a valid user
+            bool isCorrectUser = userService.IsUserWithUserRole(email, Role.ISSUER);
+            if (!isCorrectUser)
+            {
+                Console.WriteLine("Invalid email id or not an issuer user.");
+                return;
+            }
             bool exit = false;
             while (!exit)
             {
@@ -23,6 +39,7 @@ namespace assignment1.Contoller
                 {
                     case "1":
                         Console.WriteLine("Selected option 1.View all books in the inventory.");
+                        bookService.ListAllBooks();
                         break;
                     case "2":
                         Console.WriteLine("Selected option 2.View all issued from current issuer.");

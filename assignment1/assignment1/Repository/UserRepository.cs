@@ -1,4 +1,5 @@
-﻿using assignment1.Enum;
+﻿using assignment1.Entity;
+using assignment1.Enum;
 using assignment1.models;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,33 @@ namespace assignment1.Repository
             else
             {
                 People.Add(user.Email, user);
+                Console.WriteLine("User added succesfully");
             }
+        }
+
+        public List<User> GetUsersByRole(Role role)
+        {
+            return People.Values.Where(user => user.PersonRole == role).ToList();
+        }
+
+        public bool UserExistsByEmail(string email)
+        {
+            return People.ContainsKey(email);
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            if (!People.ContainsKey(email))
+            {
+                throw new Exception($"User with email '{email}' not found.");
+            }
+
+            return People[email];
+        }
+
+        public List<User> GetAllUsers()
+        {
+            return People.Values.ToList();
         }
     }
 }

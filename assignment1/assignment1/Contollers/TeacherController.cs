@@ -1,4 +1,5 @@
-﻿using assignment1.Service;
+﻿using assignment1.Enum;
+using assignment1.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,23 @@ namespace assignment1.Contoller
 {
     internal class TeacherController
     {
+
         BookService bookService = new BookService();
         BookIssueService bookIssueService = new BookIssueService();
         UserBookService userBookService = new UserBookService();
         public void HandleTeacherOptions()
         {
+            Console.WriteLine("Please enter your email id:");
+            string email = Console.ReadLine();
+            UserService userService = new UserService();
+
+            // Verify that the email belongs to a valid user
+            bool isCorrectUser = userService.IsUserWithUserRole(email, Role.TEACHER);
+            if (!isCorrectUser)
+            {
+                Console.WriteLine("Invalid email id or not an teacher user.");
+                return;
+            }
             bool exit = false;
             while (!exit)
             {
