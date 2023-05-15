@@ -12,15 +12,15 @@ namespace assignment1.Contoller
     {
         public void HandleIssuerOptions()
         {
+            UserManagementService userManagementService = new UserManagementService();
+            InventoryManagementService inventoryManagementService = new InventoryManagementService();
+            IssueManagementService issueManagementService = new IssueManagementService();
+
             Console.WriteLine("Please enter your email id:");
-            string email = Console.ReadLine();
-            UserService userService = new UserService();
-            BookService bookService = new BookService();
-
-
-
+            string issuerEmail = Console.ReadLine();
+          
             // Verify that the email belongs to a valid user
-            bool isCorrectUser = userService.IsUserWithUserRole(email, Role.ISSUER);
+            bool isCorrectUser =userManagementService.IsUserWithUserRole(issuerEmail, Role.ISSUER);
             if (!isCorrectUser)
             {
                 Console.WriteLine("Invalid email id or not an issuer user.");
@@ -39,10 +39,11 @@ namespace assignment1.Contoller
                 {
                     case "1":
                         Console.WriteLine("Selected option 1.View all books in the inventory.");
-                        bookService.ListAllBooks();
+                        inventoryManagementService.ListAllBooks();
                         break;
                     case "2":
-                        Console.WriteLine("Selected option 2.View all issued from current issuer.");
+                        Console.WriteLine("Selected option 2.View all books issued from current issuer.");
+                        issueManagementService.GetBooksIssuedFromIssuer(issuerEmail);
                         break;
                     case "3":
                         // Exit the loop and return to the main menu

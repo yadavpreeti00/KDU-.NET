@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace assignment1.Service
 {
-    internal class BookService
+    internal class InventoryManagementService
     {
         BookRepository bookRepository = new BookRepository();
 
@@ -19,9 +19,12 @@ namespace assignment1.Service
             string bookItemIdString=Console.ReadLine();
             int bookItemId=int.Parse(bookItemIdString);
             BookItem book = bookRepository.FindBookByBookId(bookItemId);
+            if(book==null)
+            {
+                Console.WriteLine("Book with book item id {0} does not exist.",bookItemId);
+                return;
+            }
             Console.WriteLine("Book item id : {0}, title: {1}, author: {2}, publish date: {3}, status: {4}", book.ItemId, book.Title, book.Author, book.PublishDate,book.Status);
-
-
         }
         public void ListAllBooks()
         {
@@ -46,8 +49,30 @@ namespace assignment1.Service
         public void AddNewBook()
         {
             BookItem bookItem = new BookItem();
-            
+            Console.WriteLine("Enter book title:");
+            string title = Console.ReadLine();
+            bookItem.Title = title;
+
+            Console.WriteLine("Enter book author:");
+            string author = Console.ReadLine();
+            bookItem.Author = author;
+
+            Console.WriteLine("Enter publish year:");
+            int year = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter publish month:");
+            int month = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter publish day:");
+            int day = int.Parse(Console.ReadLine());
+            bookItem.PublishDate = new DateOnly(year, month, day);
+
+            int itemId= BookRepository.Books.Count + 1;
+            bookItem.ItemId = itemId;
+            bookItem.Status = BookStatus.AVAILABLE;
+            bookRepository.AddBookToInventory(bookItem);
+
+            Console.WriteLine($"Book {title} by {author} with ID {itemId} added to inventory.");
         }
+
 
     }
 }

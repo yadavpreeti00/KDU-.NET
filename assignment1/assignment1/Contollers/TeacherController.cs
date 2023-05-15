@@ -11,17 +11,18 @@ namespace assignment1.Contoller
     internal class TeacherController
     {
 
-        BookService bookService = new BookService();
-        BookIssueService bookIssueService = new BookIssueService();
-        UserBookService userBookService = new UserBookService();
+        
         public void HandleTeacherOptions()
         {
+            UserManagementService userManagementService = new UserManagementService();
+            InventoryManagementService inventoryManagementService = new InventoryManagementService();
+            IssueManagementService issueManagementService = new IssueManagementService();
+
             Console.WriteLine("Please enter your email id:");
-            string email = Console.ReadLine();
-            UserService userService = new UserService();
+            string teacherEmail = Console.ReadLine();
 
             // Verify that the email belongs to a valid user
-            bool isCorrectUser = userService.IsUserWithUserRole(email, Role.TEACHER);
+            bool isCorrectUser = userManagementService.IsUserWithUserRole(teacherEmail, Role.TEACHER);
             if (!isCorrectUser)
             {
                 Console.WriteLine("Invalid email id or not an teacher user.");
@@ -45,22 +46,22 @@ namespace assignment1.Contoller
                     case "1":
                         // Code to handle adding a user
                         Console.WriteLine("Selected option 1: View all available books");
-                        bookService.GetAvailableBooks();
+                        inventoryManagementService.GetAvailableBooks();
                         break;
                     case "2":
                         // Code to handle removing a user
                         Console.WriteLine("Selected option 2: Issue a Book");
-                        bookIssueService.IssueBookToUser();
+                        issueManagementService.IssueBookToUser(teacherEmail, Role.TEACHER);
                         break;
                     case "3":
                         // Code to handle viewing all users
                         Console.WriteLine("Selected option 3: View all books issued.");
-                        userBookService.GetBooksOfUser();
+                        issueManagementService.GetBooksOfUser(teacherEmail);
 
                         break;
                     case "4":
                         Console.WriteLine("Selected option 4: Return a book");
-                        bookIssueService.ReturnBookByUser();
+                        issueManagementService.ReturnBookByUser(teacherEmail);
                         break;
                     case "5":
                         // Exit the loop and return to the main menu

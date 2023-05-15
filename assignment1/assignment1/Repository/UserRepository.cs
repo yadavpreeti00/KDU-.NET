@@ -20,7 +20,6 @@ namespace assignment1.Repository
             
             // Add issuers
             People.Add("janedoe@example.com", new User("janedoe@example.com", "Jane", "Doe", Role.ISSUER));
-            
             People.Add("alicesmith@example.com", new User ("alicesmith@example.com" ,"Alice","Smith",Role.ISSUER ));
             People.Add("bobjohnson@example.com", new User ("bobjohnson@example.com", "Bob", "Johnson" ,  Role.ISSUER ));
 
@@ -36,6 +35,7 @@ namespace assignment1.Repository
 
         }
 
+        //Save the user to user repository
         public void SaveUser(User user)
         {
             if (user == null)

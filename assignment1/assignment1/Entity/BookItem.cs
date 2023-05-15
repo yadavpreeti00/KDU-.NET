@@ -12,7 +12,7 @@ namespace assignment1.Entity
     {
         //item id is the primary key of individual book
         public int ItemId { get; set; }
-        public DateOnly? IssueDate{ get; set; }
+        public DateOnly IssueDate { get; set; } = DateOnly.MinValue;
         public BookStatus Status { get; set; }
 
     }

@@ -9,13 +9,16 @@ namespace assignment1.App_Start
 {
     internal class PopulateData
     {
+        /// <summary>
+        /// Function to call the repositories to populate data of each type 
+        /// </summary>
         public void PopulateDataOnStart()
         {
             BookRepository bookRepository = new BookRepository();
             bookRepository.CreateBookRepository();
             UserRepository userRepository = new UserRepository();
             userRepository.CreateUserRepository();
-            UserBookRepository userBookRepository = new UserBookRepository();
+            IssueRepository userBookRepository = new IssueRepository();
             userBookRepository.CreateUserBookRepository();
         }
     }

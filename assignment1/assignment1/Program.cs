@@ -5,10 +5,19 @@ using System;
 
 namespace Assignment1
 {
+    /// <summary>
+    /// Entry point of the application
+    /// </summary>
     internal class Program
     {
+        /// <summary>
+        /// Calls the function to populate data on app start
+        /// Provides initial options for user and redirects to that selected user type options
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
+
             PopulateData populateData = new PopulateData();
             populateData.PopulateDataOnStart();
             bool exit = false;
@@ -50,8 +59,9 @@ namespace Assignment1
                         issuerController.HandleIssuerOptions();
                         break;
                     case "5":
+                        //View a book info from inventory
                         Console.WriteLine("Selected option5. View a book information from inventory");
-                        BookService bookService = new BookService();
+                        InventoryManagementService bookService = new InventoryManagementService();
                         bookService.GetBookInformation();
                         break;
                     case "6":
@@ -60,12 +70,14 @@ namespace Assignment1
                         Console.WriteLine("Exiting program...");
                         break;
                     default:
+                        //invalid input default case
                         Console.WriteLine("Invalid input. Please enter a number from 1 to 5.");
                         break;
                 }
 
-                Console.WriteLine(); // Add a blank line for readability
+                Console.WriteLine();
             }
+            
         }
     }
 }

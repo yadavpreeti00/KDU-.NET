@@ -1,4 +1,5 @@
-﻿using System;
+﻿using assignment1.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +14,15 @@ namespace assignment1.Entity
         public int BookItemId { get; set; }
         public string IssuerEmail { get; set; }
 
-        public BookIssued(int  id, string userEmail, int bookItemId,string issuerEmail)
+        public BookStatus Status { get; set; } = BookStatus.AVAILABLE;
+
+        public BookIssued(int  id, string userEmail, int bookItemId,string issuerEmail,BookStatus status)
         {
             Id = id;
             UserEmail = userEmail;
             BookItemId = bookItemId;
             IssuerEmail = issuerEmail;
+            Status = status;
         }
        
 
