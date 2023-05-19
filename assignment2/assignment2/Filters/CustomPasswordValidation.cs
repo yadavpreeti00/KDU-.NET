@@ -11,31 +11,37 @@ namespace assignment2.Filters
 
             if (string.IsNullOrEmpty(password))
             {
+                ErrorMessage = "Password cannot be empty.";
                 return false;
             }
 
             if (password.Length < 8)
             {
+                ErrorMessage = "Password length can not be less than 8.";
                 return false;
             }
 
             if (!ContainsUpperCaseLetter(password))
             {
+                ErrorMessage = "Password should contain atleast one uppercase letter.";
                 return false;
             }
 
             if (!ContainsLowerCaseLetter(password))
             {
+                ErrorMessage = "Password should contain atleast one lowercase letter.";
                 return false;
             }
 
             if (!ContainsSpecialCharacter(password))
             {
+                ErrorMessage = "Password should contain atleast one special character.";
                 return false;
             }
 
             if (ContainsSequentialNumbers(password))
             {
+                ErrorMessage = "Password cannot contain sequential numbers e.g 123.";
                 return false;
             }
 
@@ -64,15 +70,14 @@ namespace assignment2.Filters
 
         private bool ContainsSequentialNumbers(string password)
         {
-            for (int i = 0; i < password.Length - 2; i++)
+            for (int i = 0; i < password.Length - 1; i++)
             {
-                if (char.IsDigit(password[i]) && char.IsDigit(password[i + 1]) && char.IsDigit(password[i + 2]))
+                if (char.IsDigit(password[i]) && char.IsDigit(password[i + 1]))
                 {
                     int firstDigit = int.Parse(password[i].ToString());
                     int secondDigit = int.Parse(password[i + 1].ToString());
-                    int thirdDigit = int.Parse(password[i + 2].ToString());
 
-                    if (secondDigit == firstDigit + 1 && thirdDigit == secondDigit + 1)
+                    if (secondDigit == firstDigit + 1)
                     {
                         return true;
                     }

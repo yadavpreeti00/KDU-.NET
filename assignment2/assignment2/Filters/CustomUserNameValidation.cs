@@ -10,16 +10,19 @@ namespace assignment2.Filters
 
             if (string.IsNullOrEmpty(username))
             {
+                ErrorMessage = "Username cannot be empty.";
                 return false;
             }
 
             if (username.Length < 5)
             {
+                ErrorMessage = "Username length cannot be less than 5.";
                 return false;
             }
 
             if (!IsValidUsername(username))
             {
+                ErrorMessage = "Username cannot contain special characters.";
                 return false;
             }
 

@@ -14,7 +14,6 @@ namespace assignment2.Middlewares
             }
             catch (CustomException ex)
             {
-                Console.WriteLine("custom exception");
                 context.Response.StatusCode = ex.StatusCode;
                 context.Response.ContentType = "application/json";
                 string jsonErrorResponse = GenerateErrorResponse(ex.Message, context.Request.Path, ex.StatusCode);

@@ -10,11 +10,13 @@ namespace assignment2.Filters
 
             if (string.IsNullOrEmpty(phoneNumber))
             {
+                ErrorMessage = "Phone number cannot be empty.";
                 return false;
             }
 
             if (phoneNumber.Length != 10)
             {
+                ErrorMessage = "Phone number should be of lenght 10.";
                 return false;
             }
 
@@ -22,6 +24,7 @@ namespace assignment2.Filters
             {
                 if (!char.IsDigit(c))
                 {
+                    ErrorMessage = "Phone number can only contain digits.";
                     return false;
                 }
             }

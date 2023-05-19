@@ -10,6 +10,7 @@ namespace assignment2.Filters
 
             if (string.IsNullOrEmpty(email))
             {
+                ErrorMessage = "Email address cannot be empty.";
                 return false;
             }
 
@@ -19,6 +20,7 @@ namespace assignment2.Filters
             //if @ and . are at correct position
             if (atIndex < 1 || dotIndex <= atIndex + 1 || dotIndex == email.Length - 1)
             {
+                ErrorMessage = "Invalid email address.";
                 return false;
             }
 
